@@ -47,10 +47,10 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/frontend"
+      "path": "./apps/web"
     },
     {
-      "path": "./apps/backend"
+      "path": "./apps/api"
     }
   ]
 }

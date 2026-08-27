@@ -26,7 +26,7 @@ export class IndexStore {
     return this.invertedIndex.get(token.toLowerCase()) ?? new Set();
   }
 
-  getDocument(id: string): IndexedSymbol | undefined {
+  getDocument(id: any): IndexedSymbol | undefined {
     return this.documents.get(id);
   }
 }

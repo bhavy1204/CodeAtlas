@@ -29,4 +29,28 @@ export class IndexStore {
   getDocument(id: any): IndexedSymbol | undefined {
     return this.documents.get(id);
   }
+
+  search(query: string): IndexedSymbol[] {
+    const queryTokens = tokenize(query);
+    if (queryTokens.length === 0) return [];
+
+    const idSets = queryTokens.map(token => this.getDocumentIds(token))
+
+    if (idSets.length === 0) return [];
+
+    const first = idSets[0];
+    const rest = idSets.slice(1);
+
+    if (!first) {
+      return []
+    }
+
+    const matchingIds = [...first].filter(id =>
+      rest.every(set => set.has(id))
+    );
+
+    return matchingIds
+      .map(id => this.documents.get(id))
+      .filter((doc): doc is IndexedSymbol => doc !== undefined);
+  }
 }

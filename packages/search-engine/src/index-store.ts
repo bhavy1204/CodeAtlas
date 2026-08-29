@@ -5,16 +5,23 @@ export class IndexStore {
   private documents = new Map<string, IndexedSymbol>();
   private invertedIndex = new Map<string, Set<string>>(); // token -> doc ids
 
+private nameTokens = new Map<string, Set<string>>(); // docId -> set of tokens from symbolName
+
+
   addDocument(doc: IndexedSymbol): void {
     this.documents.set(doc.id, doc);
 
+    const nameTokenSet = new Set(tokenize(doc.symbolName));
+
+    this.nameTokens.set(doc.id, nameTokenSet);
+
     // tokenize the fields worth searching
-    const tokens = new Set([
+    const allTokens = new Set([
       ...tokenize(doc.symbolName),
       ...tokenize(doc.signature),
     ]);
 
-    for (const token of tokens) {
+    for (const token of allTokens) {
       if (!this.invertedIndex.has(token)) {
         this.invertedIndex.set(token, new Set());
       }

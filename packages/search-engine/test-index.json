@@ -1,0 +1,112 @@
+{
+  "documents": [
+    [
+      "103",
+      {
+        "id": "103",
+        "repoFullName": "some/repo",
+        "filePath": "src/wait.js",
+        "symbolName": "wait",
+        "symbolType": "function",
+        "signature": "function wait(ms)",
+        "snippet": "function wait(ms) { ... }",
+        "startLine": 1,
+        "endLine": 5,
+        "language": "js"
+      }
+    ],
+    [
+      "101",
+      {
+        "id": "101",
+        "repoFullName": "lodash/lodash",
+        "filePath": "src/debounce.js",
+        "symbolName": "debounce",
+        "symbolType": "function",
+        "signature": "function debounce(fn, wait)",
+        "snippet": "function debounce(fn, wait) { ... }",
+        "startLine": 20,
+        "endLine": 45,
+        "language": "js"
+      }
+    ],
+    [
+      "102",
+      {
+        "id": "102",
+        "repoFullName": "user/lodash",
+        "filePath": "src/throttle.js",
+        "symbolName": "throttle",
+        "symbolType": "function",
+        "signature": "function throttle(fn, wait)",
+        "snippet": "function throttle(fn, wait) { ... }",
+        "startLine": 10,
+        "endLine": 30,
+        "language": "js"
+      }
+    ]
+  ],
+  "invertedIndex": [
+    [
+      "wait",
+      [
+        "103",
+        "101",
+        "102"
+      ]
+    ],
+    [
+      "function",
+      [
+        "103",
+        "101",
+        "102"
+      ]
+    ],
+    [
+      "ms",
+      [
+        "103"
+      ]
+    ],
+    [
+      "debounce",
+      [
+        "101"
+      ]
+    ],
+    [
+      "fn",
+      [
+        "101",
+        "102"
+      ]
+    ],
+    [
+      "throttle",
+      [
+        "102"
+      ]
+    ]
+  ],
+  "nameTokens": [
+    [
+      "103",
+      [
+        "wait"
+      ]
+    ],
+    [
+      "101",
+      [
+        "debounce"
+      ]
+    ],
+    [
+      "102",
+      [
+        "throttle"
+      ]
+    ]
+  ]
+}

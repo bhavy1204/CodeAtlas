@@ -62,5 +62,6 @@ console.log("------------------------------Search-------------------------------
 // console.log("search('debounce wait'):", store.search("debounce wait").map(d => d.symbolName));
 // console.log("search('throttle nonExistingENtity'):", store.search("throttle nonexistentword").map(d => d.symbolName));
 
-
-console.log("search('wait') ranked:", store.search("wait").map(d => d.symbolName));
+store.saveToFile("./test-index.json")
+const loaded = IndexStore.loadFromFile("./test-index.json");
+console.log("search('wait') ranked:", loaded.search("wait").map(d => d.symbolName));

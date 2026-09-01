@@ -4,8 +4,7 @@ import type { IndexedSymbol } from "./types";
 export class IndexStore {
   private documents = new Map<string, IndexedSymbol>();
   private invertedIndex = new Map<string, Set<string>>(); // token -> doc ids
-
-private nameTokens = new Map<string, Set<string>>(); // docId -> set of tokens from symbolName
+  private nameTokens = new Map<string, Set<string>>(); // docId -> set of tokens from symbolName
 
 
   addDocument(doc: IndexedSymbol): void {
@@ -56,8 +55,27 @@ private nameTokens = new Map<string, Set<string>>(); // docId -> set of tokens f
       rest.every(set => set.has(id))
     );
 
-    return matchingIds
-      .map(id => this.documents.get(id))
-      .filter((doc): doc is IndexedSymbol => doc !== undefined);
+     const scored = matchingIds.map(id => {
+      const doc = this.documents.get(id)!;
+      const nameSet = this.nameTokens.get(id) ?? new Set();
+
+      let score = 0;
+      for (const qToken of queryTokens) {
+        if (doc.symbolName.toLowerCase() === qToken) {
+          score += 10; // exact full-name match
+        } else if (nameSet.has(qToken)) {
+          score += 5;  // token matched symbolName
+        } else {
+          score += 1;  // only signature
+        }
+      }
+      return { doc, score };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+
+    console.log(scored)
+
+    return scored.map(s => s.doc);
   }
 }

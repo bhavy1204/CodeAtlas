@@ -55,7 +55,14 @@ async function main() {
     console.log(`Found ${files.length} JS/TS files`);
     console.log(files.slice(0, 20));
 
-    const content = await fetchFileContent("lodash", "lodash", files[0]);
+    const firstFile = files[0];
+
+    if (!firstFile) {
+        console.log("No JS/TS fiel found");
+        return;
+    }
+
+    const content = await fetchFileContent("lodash", "lodash", firstFile);
     console.log("--- content of", files[0], "---");
     console.log(content.slice(0, 300));
 }

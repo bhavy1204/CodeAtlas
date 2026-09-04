@@ -6,11 +6,15 @@
     "dev": "tsx src/index.ts"
   },
   "dependencies": {
+    "@babel/parser": "^8.0.4",
+    "@babel/traverse": "^8.0.4",
     "@repo/search-engine": "workspace:*",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
+    "@babel/types": "^8.0.4",
     "@repo/typescript-config": "workspace:*",
+    "@types/babel__traverse": "^7.28.0",
     "@types/node": "^24.13.3",
     "tsx": "^4.16.2",
     "typescript": "^5.5.4"

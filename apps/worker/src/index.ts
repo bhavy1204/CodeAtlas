@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { extractSymbols } from "./extractSymbols";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 if (!GITHUB_TOKEN) {
@@ -52,8 +53,22 @@ async function fetchFileContent(owner: string, repo: string, path: string): Prom
 
 async function main() {
     const files = await listRepoFiles("lodash", "lodash");
-    console.log(`Found ${files.length} JS/TS files`);
-    console.log(files.slice(0, 20));
+    // console.log(`Found ${files.length} JS/TS files`);
+    // console.log(files.slice(0, 20));
+    const targetFile = files.find(f => f.includes("debounce")) ?? files[0];
+
+    if (!targetFile) {
+        console.log("TArget file missing");
+        return;
+    }
+    const content = await fetchFileContent("lodash", "lodash", targetFile);
+    const symbols = extractSymbols(content, {
+        repoFullName: "lodash/lodash",
+        filePath: targetFile,
+        language: "js",
+    });
+
+
 
     const firstFile = files[0];
 
@@ -62,7 +77,7 @@ async function main() {
         return;
     }
 
-    const content = await fetchFileContent("lodash", "lodash", firstFile);
+    // const content = await fetchFileContent("lodash", "lodash", firstFile);
     console.log("--- content of", files[0], "---");
     console.log(content.slice(0, 300));
 }
